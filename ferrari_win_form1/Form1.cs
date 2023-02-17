@@ -29,9 +29,9 @@ namespace ferrari_win_form1
             toolTip2.SetToolTip(button3, "Cancella la stringa inserita in input per 1 occorrenza");
             toolTip3.SetToolTip(button5, "Ordina l'array in ordine alfabetico con il metodo Bubblesort");
             toolTip4.SetToolTip(button4, "Ricerca la stringa inserita in input e ne restituisce la posizione");
-            toolTip5.SetToolTip(button9, "Macchieccheromeilcazzoporcoddio");
-            toolTip6.SetToolTip(button8, "Macchieccheromeilcazzoporcoddio");
-            toolTip8.SetToolTip(button6, "Macchieccheromeilcazzoporcoddio");
+            toolTip5.SetToolTip(button9, "Restituisce il numero di ripetizioni dei nomi");
+            toolTip6.SetToolTip(button8, "Ipsum");
+            toolTip8.SetToolTip(button6, "Restituisce il nome più lungo/più corto");
             toolTip9.SetToolTip(button10, "Cancella la stringa inserita in input per tutte le occorrenze");
         }
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -82,21 +82,36 @@ namespace ferrari_win_form1
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            pos = RicercaSequenziale(lunghezza, textBox1.Text, array);
-            if (pos > 0)
+            int outp = RicercaSequenziale(lunghezza, textBox1.Text, array);
+            if (outp < 0)
             {
-                listView1.Items.Clear();
-                listView1.Items.Add($"Posizione: {pos}");
-                textBox1.Text = "";
+                MessageBox.Show("Nome non trovato");
             }
             else
             {
-
+                MessageBox.Show($"Il nome {textBox1.Text} si trova in posizione {outp}");
             }
+            textBox1.Text = "";
         }
         private void button9_Click(object sender, EventArgs e)
         {
-
+            string vis = VisualizzaRipetuti(lunghezza, array);
+            if (lunghezza > 0)
+            {
+                if (vis != "")
+                {
+                    MessageBox.Show(vis);
+                }
+                else
+                {
+                    MessageBox.Show("Nessuna Ripetizione");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Array Vuoto");
+            }
+            textBox1.Text = "";
         }
         private void button8_Click(object sender, EventArgs e)
         {
@@ -104,7 +119,15 @@ namespace ferrari_win_form1
         }
         private void button6_Click(object sender, EventArgs e)
         {
-
+            if (lunghezza > 0)
+            {
+                MessageBox.Show(LungoCorto(array, lunghezza));
+            }
+            else 
+            {
+                MessageBox.Show("Array Vuoto");
+            }
+            textBox1.Text = "";
         }
         private void button10_Click(object sender, EventArgs e)
         {
@@ -290,8 +313,5 @@ namespace ferrari_win_form1
             }
         }       //cancella nomi uguali
         #endregion
-
-
-
     }
 }

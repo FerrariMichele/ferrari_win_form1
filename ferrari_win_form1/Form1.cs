@@ -30,7 +30,7 @@ namespace ferrari_win_form1
             toolTip3.SetToolTip(button5, "Ordina l'array in ordine alfabetico con il metodo Bubblesort");
             toolTip4.SetToolTip(button4, "Ricerca la stringa inserita in input e ne restituisce la posizione");
             toolTip5.SetToolTip(button9, "Restituisce il numero di ripetizioni dei nomi");
-            toolTip6.SetToolTip(button8, "Ipsum");
+            toolTip6.SetToolTip(button8, "permette di modificare il nome trovato nella posizione inserito, inmmettendo il nuovo nome in input");
             toolTip8.SetToolTip(button6, "Restituisce il nome più lungo/più corto");
             toolTip9.SetToolTip(button10, "Cancella la stringa inserita in input per tutte le occorrenze");
         }
@@ -95,9 +95,9 @@ namespace ferrari_win_form1
         }
         private void button9_Click(object sender, EventArgs e)
         {
-            string vis = VisualizzaRipetuti(lunghezza, array);
             if (lunghezza > 0)
             {
+                string vis = VisualizzaRipetuti(lunghezza, array);
                 if (vis != "")
                 {
                     MessageBox.Show(vis);
@@ -115,7 +115,29 @@ namespace ferrari_win_form1
         }
         private void button8_Click(object sender, EventArgs e)
         {
-
+            if (lunghezza > 0)
+            {
+                pos = int.Parse(textBox2.Text);
+                if (pos >= 0 && pos <= lunghezza)
+                {
+                    ModificaNome(array, textBox1.Text, pos);
+                    listView1.Items.Clear();
+                    for (int i = 0; i < lunghezza; i++)
+                    {
+                        listView1.Items.Add(array[i]);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Errore nell'input/posizione");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Array Vuoto");
+            }
+            textBox1.Text = "";
+            textBox2.Text = "";
         }
         private void button6_Click(object sender, EventArgs e)
         {
@@ -313,5 +335,15 @@ namespace ferrari_win_form1
             }
         }       //cancella nomi uguali
         #endregion
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
